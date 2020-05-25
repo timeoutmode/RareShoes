@@ -1,0 +1,67 @@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@{
+   
+        ViewBag.Title = "Catalog";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<link href="~/css/PagedList.css" rel="stylesheet" type="text/css" />
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Image
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Category
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.Model)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                <img src="~/Images/Products/@item.ImageFileName" style="width:100px" />
+            </td>
+            <td style="text-align: right">
+                @item.UnitCost
+            </td>
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @item.CategoryName
+            </td>
+            <td>
+                <a href="~/OrderDetails/ShoppingCart?ShoesId=@item.ShoesId&pageNumber=@Context.Request.Query["pageNumber"]">Add&nbsp;to&nbsp;Cart</a>
+            </td>
+            <td>
+                <a href="~/Catalog/Details?ShoesId=@item.ShoesId&pageNumber=@Context.Request.Query["pageNumber"]" >Details</a>
+            </td>
+        </tr>
+    }
+    
+</table>
+<div>
+    @* Bug in asp.net core 2.2 where naming a variable as 'page' stops the PagedListPager
+        from working. Fixed the problem by changing 'page' to 'pageNumber'*@
+    @* Pager section rendered using Html helper*@
+    @Html.PagedListPager((IPagedList)ViewBag.Model, pageNumber => Url.Action("Index", new { pageNumber }))
+</div>
+
+

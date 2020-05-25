@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="slideshow-container">
+    <div class="menuSlides slides fadeAway img-fluid">
+        <div>Authentic Shoes Guarantee</div>
+        <img class=" img-fluid"src="~/images/products/homage.jpg"  alt="Dota 2 logo" />
+    </div>
+    <div class="menuSlides slides fadeAway img-fluid">
+        <div>Shop Now. Free Shipping within NZ</div>
+        <img lass=" img-fluid" src="~/images/products/phantom.jpg" alt="Dota 2 logo" />
+    </div>
+    <div class="menuSlides slides fadeAway img-fluid">
+        <div>Browse Rare Air Jordans</div>
+        <img lass=" img-fluid" src="~/images/products/bredtoe.jpg" alt="Dota 2 logo" />
+    </div>
+
+
+
+    <!--Buttons for changing the slides-->
+    <a class="prev" onclick="changeAutoSlide(-1);">&#10094;</a>
+    <a class="next" onclick="changeAutoSlide(1);">&#10095;</a>
+</div>
+
+
+<script type="text/javascript">
+    var index = 0;
+    document.onload = autoSlideShow();
+
+    function autoSlideShow() {
+        // grab all the images into a list
+        var slides = document.getElementsByClassName("menuSlides");
+
+        // hide the current image
+        slides[index].style.display = "none";
+
+        // move the index to the next image
+        index++
+        if (index >= slides.length) {
+            index = 0;
+        }
+
+        // Reveal the next image
+        slides[index].style.display = "block";
+
+        setTimeout(function () { autoSlideShow() }, 5000);
+        
+    }
+
+    function changeAutoSlide(n) {
+        var slides = document.getElementsByClassName("menuSlides");
+
+        // hide the current image
+        slides[index].style.display = "none";
+
+        // move the index to the next image
+        index += n;
+        if (index >= slides.length) {
+            index = 0;
+        }
+        if (index < 0) {
+            index = slides.length - 1;
+        }
+
+        // Reveal the next image
+        slides[index].style.display = "block";
+    }
+</script>
